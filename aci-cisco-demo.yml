@@ -9,7 +9,7 @@
       password: "{{ lookup('env', 'ANSIBLE_NET_PASSWORD') }}"
       validate_certs: no
     customer_id: '{{ _customer_id }}' # i.e. 100
-    tenant_name: 'TEN_{{ _tenant_shortname|upper }}' # i.e. ABC
+    tenant_name: '{{ _tenant_shortname|upper }}' # i.e. ABC
 
 #    vrf_name: '{{ _vrf_name|upper }}' # i.e. VRF_ABC
 #    bd_name: '{{ _bd_name|upper }}' # i.e. BD_ABC_XYZ
