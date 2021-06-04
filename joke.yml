@@ -1,0 +1,15 @@
+---
+ - name: getjokes
+   hosts: localhost
+   gather_facts: false
+   connection: local
+
+   tasks:
+    - name: getthejoke
+      uri:
+        url: https://api.chucknorris.io/jokes/random
+        return_content: yes
+      register: content
+
+    - debug:
+        msg: " {{content.json.value }}"
