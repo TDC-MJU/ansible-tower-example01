@@ -8,8 +8,8 @@
       username: "admin"
       password: "ciscopsdt"
       validate_certs: no
-      tenant_name: '{{ avx_tenant }}'
-      tenant_desc: '{{ avx_tenant_desc }}'
+    tenant_name: '{{ avx_tenant }}'
+    tenant_desc: '{{ avx_tenant_desc }}'
 
   tasks:
   - name: Create Tenant
