@@ -15,7 +15,7 @@
   - name: Create Tenant
     aci_tenant:
       <<: *aci_login
-      tenant: 'MJU2'
-      description: 'Customer MJU2'
+      tenant: '{{ tenant }}'
+      description: 'Customer {{ tenant }}'
       state: present
     delegate_to: localhost
