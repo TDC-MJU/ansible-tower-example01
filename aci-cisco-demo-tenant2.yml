@@ -9,13 +9,14 @@
       password: "ciscopsdt"
       validate_certs: no
 #    customer_id: '{{ _customer_id }}' # i.e. 100
-#    tenant_name: '{{ tenant }}' # i.e. ABC
+     tenant_name: '{{ avx_tenant }}'
+     tenant_desc: '{{ avx_tenant_desc}}
 
   tasks:
   - name: Create Tenant
     aci_tenant:
       <<: *aci_login
-      tenant: '{{ tenant }}'
-      description: 'Customer {{ tenant }}'
+      tenant: '{{ tenant_name }}'
+      description: '{{ tenant_desc }}'
       state: present
     delegate_to: localhost
