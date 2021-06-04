@@ -1,0 +1,21 @@
+- name: Customer Tenant Deployment - Basic Tenant\BD\VRF\VID\EPG\AEP-Assignment
+  hosts: all
+  connection: local
+  gather_facts: no
+  vars:
+    aci_login: &aci_login
+      hostname: '{{ inventory_hostname }}'
+      username: "{{ lookup('env', 'ANSIBLE_NET_USERNAME') }}"
+      password: "{{ lookup('env', 'ANSIBLE_NET_PASSWORD') }}"
+      validate_certs: no
+#    customer_id: '{{ _customer_id }}' # i.e. 100
+#    tenant_name: '{{ _tenant_shortname|upper }}' # i.e. ABC
+
+  tasks:
+  - name: Create Tenant
+    aci_tenant:
+      <<: *aci_login
+      tenant: 'MJU2'
+      description: 'Customer MJU2'
+      state: present
+    delegate_to: localhost
