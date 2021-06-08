@@ -20,5 +20,5 @@
         recipient_id: "{{myroom}}"
         msg_type: text
         personal_token: "{{ mytoken }}"
-        msg: "{{message}}""
+        msg: "{{message}}"
       register: results
