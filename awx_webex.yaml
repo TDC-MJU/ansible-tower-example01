@@ -1,0 +1,24 @@
+---
+# req : ansible-galaxy collection install community.general
+
+ - name: webex demo
+
+   hosts: localhost
+   connection: local
+   gather_facts: False
+ 
+   vars:
+    mytoken: "{{awx_mytoken}}"
+    myroom: "{{awx_myroom}}"
+
+
+   tasks:
+        
+    - name: Cisco Webex Teams - Text Message to a Room
+      community.general.cisco_webex:
+        recipient_type: roomId
+        recipient_id: "{{myroom}}"
+        msg_type: text
+        personal_token: "{{ mytoken }}"
+        msg: "in your bot today"
+      register: results
