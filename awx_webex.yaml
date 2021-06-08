@@ -18,7 +18,7 @@
       community.general.cisco_webex:
         recipient_type: roomId
         recipient_id: "{{myroom}}"
-        msg_type: text
+        msg_type: markdown
         personal_token: "{{ mytoken }}"
         msg: "{{message}}"
       register: results
