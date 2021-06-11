@@ -4,7 +4,8 @@
   gather_facts: no
   vars:
     aci_login: &aci_login
-      hostname: '{{ inventory_hostname }}'
+#      hostname: '{{ inventory_hostname }}'
+      hostname: "sandboxapicdc.cisco.com"
       username: "admin"
       password: "ciscopsdt"
       validate_certs: no
@@ -20,24 +21,34 @@
       state: query
     register: all_tenants
     delegate_to: localhost   
-        
-  - name: Cisco Webex Teams - Text Message to a Room
-    community.general.cisco_webex:
-      recipient_type: roomId
-      recipient_id: "{{myroom}}"
-      msg_type: markdown
-      personal_token: "{{ mytoken }}"
-      msg: "{{all_tenants}}"
-    register: results
     
     
   - name: Create a subnet list item
     set_fact:
       array_content: "{{ item['fvTenant']['attributes']['name'] }}" 
     with_items: 
-      - "{{ results['imdata'] }}"
+      - "{{all_tenants['current'] }}"
     register: array_of_contents      
       
       
+#  - debug:
+#      var: array_of_contents
+      
+      
+  - name: Make a list with all the subnet items
+    set_fact: 
+         data_struc: "{{ array_of_contents.results | map(attribute='ansible_facts.array_content') | list }}"
+
+
   - debug:
-      var: array_of_contents     
+      var: data_struc
+
+       
+  - name: Cisco Webex Teams - Text Message to a Room
+    community.general.cisco_webex:
+      recipient_type: roomId
+      recipient_id: "{{myroom}}"
+      msg_type: markdown
+      personal_token: "{{ mytoken }}"
+      msg: "{{data_struc}}"
+    register: results      
