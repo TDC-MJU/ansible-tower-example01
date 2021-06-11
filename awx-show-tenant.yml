@@ -8,20 +8,9 @@
       username: "admin"
       password: "ciscopsdt"
       validate_certs: no
-#    tenant_name: '{{ avx_tenant }}'
-#    tenant_desc: '{{ avx_tenant_desc }}'
-
-  tasks:
-
-#  - name: Create Tenant
-#    aci_tenant:
-#      <<: *aci_login
-#      tenant: '{{ tenant_name }}'
-#      description: '{{ tenant_desc }}'
-#      state: present
-#    delegate_to: localhost
-
-
+    mytoken: "{{awx_mytoken}}"
+    myroom: "{{awx_myroom}}"
+    message: "{{awx_message}}"  tasks:
 
 
   - name: Query all tenants
@@ -29,4 +18,13 @@
       <<: *aci_login
       state: query
     register: all_tenants
-    delegate_to: localhost
+    delegate_to: localhost   
+        
+  - name: Cisco Webex Teams - Text Message to a Room
+    community.general.cisco_webex:
+      recipient_type: roomId
+      recipient_id: "{{myroom}}"
+      msg_type: markdown
+      personal_token: "{{ mytoken }}"
+      msg: "{{message}}"
+    register: results
