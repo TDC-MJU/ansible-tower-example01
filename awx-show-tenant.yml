@@ -10,7 +10,9 @@
       validate_certs: no
     mytoken: "{{awx_mytoken}}"
     myroom: "{{awx_myroom}}"
-    message: "{{awx_message}}"  tasks:
+    message: "{{awx_message}}"  
+    
+  tasks:
 
 
   - name: Query all tenants
