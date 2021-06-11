@@ -26,7 +26,7 @@
   - name: Create a subnet list item
     set_fact:
 #      array_content: "{{ item['fvTenant']['attributes']['name'] }}" 
-      array_content: "{{ item['fvTenant']['attributes']['name'] }} {{ item['fvTenant']['attributes']['descr'] }}" 
+      array_content: "{{ item['fvTenant']['attributes']['name'] }}{{ item['fvTenant']['attributes']['descr'] }}" 
 
     with_items: 
       - "{{all_tenants['current'] }}"
