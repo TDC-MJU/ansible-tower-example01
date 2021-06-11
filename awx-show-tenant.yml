@@ -43,6 +43,9 @@
   - debug:
       var: data_struc
 
+  - debug:
+      var: "{{data_struc | to_nice_yaml (indent=2)}}"
+
        
   - name: Cisco Webex Teams - Text Message to a Room
     community.general.cisco_webex:
