@@ -10,7 +10,7 @@
       validate_certs: no
     mytoken: "{{awx_mytoken}}"
     myroom: "{{awx_myroom}}"
-    message: "{{awx_message}}"  
+#    message: "{{awx_message}}"  
     
   tasks:
 
@@ -28,5 +28,5 @@
       recipient_id: "{{myroom}}"
       msg_type: markdown
       personal_token: "{{ mytoken }}"
-      msg: "{{message}}"
+      msg: "{{all_tenants}}"
     register: results
