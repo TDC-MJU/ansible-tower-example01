@@ -53,5 +53,5 @@
       recipient_id: "{{myroom}}"
       msg_type: text
       personal_token: "{{ mytoken }}"
-      msg: "{{data_struc}}"
+      msg: "{{data_struc | to_nice_yaml (indent=2)}}"
     register: results      
