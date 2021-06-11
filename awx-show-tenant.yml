@@ -32,11 +32,11 @@
     
     
   - name: Create a subnet list item
-      set_fact:
-        array_content: "{{ item['fvTenant']['attributes']['name'] }}" 
-      with_items: 
-        - "{{ results['imdata'] }}"
-      register: array_of_contents      
+    set_fact:
+      array_content: "{{ item['fvTenant']['attributes']['name'] }}" 
+    with_items: 
+      - "{{ results['imdata'] }}"
+    register: array_of_contents      
       
       
   - debug:
