@@ -1,0 +1,24 @@
+- name: Customer Tenant Deployment - Basic Tenant\BD\VRF\VID\EPG\AEP-Assignment
+  hosts: all
+  connection: local
+  gather_facts: no
+  vars:
+    aci_login: &aci_login
+#      hostname: '{{ inventory_hostname }}'
+      hostname: "sandboxapicdc.cisco.com"
+      username: "admin"
+      password: "ciscopsdt"
+      validate_certs: no
+    mytoken: "{{awx_tenant_name}}"
+    
+  tasks:
+
+
+  - name: Query all tenants
+    aci_tenant:
+      <<: *aci_login
+      tenant: {{tenant_name}}
+      state: absent
+    delegate_to: localhost   
+    
+  
