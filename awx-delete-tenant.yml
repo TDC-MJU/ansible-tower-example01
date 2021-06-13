@@ -1,4 +1,4 @@
-- name: Customer Tenant Deployment - Basic Tenant\BD\VRF\VID\EPG\AEP-Assignment
+- name: Dele a tenant / vars from AWX
   hosts: all
   connection: local
   gather_facts: no
@@ -9,16 +9,13 @@
       username: "admin"
       password: "ciscopsdt"
       validate_certs: no
-    mytoken: "{{awx_tenant_name}}"
+    tenant_name: '{{awx_tenant}}'
     
   tasks:
 
-
-  - name: Query all tenants
+  - name: Delete a tenant
     aci_tenant:
       <<: *aci_login
-      tenant: {{tenant_name}}
+      tenant: '{{tenant_name}}'
       state: absent
-    delegate_to: localhost   
-    
-  
+    delegate_to: localhost
