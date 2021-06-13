@@ -44,11 +44,11 @@
          data_struc: "{{ array_of_contents.results | map(attribute='ansible_facts.array_content') | list }}"
 
 
-  - debug:
-      var: data_struc
+#  - debug:
+#      var: data_struc
 
-  - debug:
-      var: "{{data_struc | to_nice_yaml (indent=2)}}"
+#  - debug:
+#      var: "{{data_struc | to_nice_yaml (indent=2)}}"
 
        
   - name: Cisco Webex Teams - Text Message to a Room
@@ -57,5 +57,5 @@
       recipient_id: "{{myroom}}"
       msg_type: text
       personal_token: "{{ mytoken }}"
-      msg: "{{data_struc | to_nice_yaml (indent=2)}}"
+      msg: "{{data_struc |join('\n')}}"
     register: results      
