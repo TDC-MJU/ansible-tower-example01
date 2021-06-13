@@ -1,0 +1,32 @@
+---
+ - name: getjokes
+   hosts: localhost
+   gather_facts: false
+   connection: local
+   vars:
+     mytoken: "{{awx_mytoken}}"
+     myroom: "{{awx_myroom}}"
+   
+   tasks:
+    - name: getthejoke
+      uri:
+        url: https://api.chucknorris.io/jokes/random
+        return_content: yes
+      register: content
+
+#    - debug:
+#        msg: " {{content.json.value }}"
+    
+  - name: set joke
+    set_fact: 
+         data_struc: " {{content.json.value }}"
+
+     
+  - name: Cisco Webex Teams - Text Message to a Room
+    community.general.cisco_webex:
+      recipient_type: roomId
+      recipient_id: "{{myroom}}"
+      msg_type: text
+      personal_token: "{{ mytoken }}"
+      msg: "{{data_struc |join('\n')}}"
+    register: results      
