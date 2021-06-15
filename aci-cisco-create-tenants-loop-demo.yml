@@ -1,0 +1,73 @@
+---
+- name: Cteate Tenant
+  hosts: all
+  connection: local
+  gather_facts: no
+  vars:
+    aci_login: &aci_login
+      hostname: '{{ inventory_hostname }}'
+      username: "admin"
+      password: "ciscopsdt"
+      validate_certs: no
+    tenant_name: '{{ avx_tenant }}'
+
+    input:
+        - { name: Tenant01}
+        - { name: Tenant02}
+
+  tasks:
+
+  - name: Create Tenant
+    aci_tenant:
+      <<: *aci_login
+      tenant: '{{ item.name }}'
+      state: present
+    delegate_to: localhost
+    with_items: "{{ input }}"
+
+
+
+
+
+##
+##
+##---
+##- name: Create AAEP
+##  hosts: apic
+##  connection: local
+##  gather_facts: False
+##
+##
+##  vars:
+##
+##     input:
+###        - { aaep: 3001.VLAN_AAEP, vlan_domain: COSTOMER.CLOSED.VLAN_PHYS.DOM}
+##         - { aaep: 2902.VLAN_AAEP, vlan_domain: SERVER.TRUNK_PHYS.DOM}
+##   
+##  tasks:
+##
+##  - name: Create aep
+##    aci_aep:
+##      host: "{{ inventory_hostname }}"
+##      username: "{{ aci_username }}"
+##      password: "{{ aci_password }}"
+##      validate_certs: no
+##      aep: "{{ item.aaep }}"
+##      state: present
+##    with_items: "{{ input }}"
+##
+##  - name: Add AEP to domain binding
+##    aci_aep_to_domain: &binding_present
+##      host: "{{ inventory_hostname }}"
+##      username: "{{ aci_username }}"
+##      password: "{{ aci_password }}"
+##      validate_certs: no
+##      aep: "{{ item.aaep }}"
+##      domain: "{{ item.vlan_domain }}"
+##      domain_type: phys
+##      state: present
+##    with_items: "{{ input }}"
+##
+##
+##
+##
