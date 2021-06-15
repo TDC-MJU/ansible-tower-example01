@@ -10,10 +10,12 @@
       password: "ciscopsdt"
       validate_certs: no
     tenant_name: '{{ avx_tenant }}'
+    input: '{{awx_input}}'
 
-    input:
-        - { name: Tenant01}
-        - { name: Tenant02}
+
+#    input:
+#        - { name: Tenant01}
+#        - { name: Tenant02}
 
   tasks:
 
