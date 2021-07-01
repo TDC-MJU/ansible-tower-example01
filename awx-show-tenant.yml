@@ -26,7 +26,7 @@
     aci_login: &aci_login
       hostname: '{{ inventory_hostname }}'
       username: "admin"
-      password: "ciscopsdt"
+      password: "{{ lookup('env', 'ANSIBLE_NET_PASSWORD') }}"
       validate_certs: no
     mytoken: "{{awx_mytoken}}"
     myroom: "{{awx_myroom}}"
