@@ -4,8 +4,8 @@
   gather_facts: no
   vars:
     aci_login: &aci_login
-#      hostname: '{{ inventory_hostname }}'
-      hostname: "sandboxapicdc.cisco.com"
+      hostname: '{{ inventory_hostname }}'
+#      hostname: "sandboxapicdc.cisco.com"
       username: "admin"
       password: "ciscopsdt"
       validate_certs: no
