@@ -11,16 +11,26 @@
 #    mytoken: "{{awx_mytoken}}"
 #    myroom: "{{awx_myroom}}"
 
+#  vars:
+#    aci_login: &aci_login
+#      hostname: "sandboxapicdc.cisco.com"
+#      username: "admin"
+#      password: "ciscopsdt"
+#      validate_certs: no
+#    mytoken: "{{awx_mytoken}}"
+#    myroom: "{{awx_myroom}}"
+
 
 
   vars:
     aci_login: &aci_login
-      hostname: "sandboxapicdc.cisco.com"
+      hostname: '{{ inventory_hostname }}'
       username: "admin"
       password: "ciscopsdt"
       validate_certs: no
     mytoken: "{{awx_mytoken}}"
     myroom: "{{awx_myroom}}"
+
 
 
 
