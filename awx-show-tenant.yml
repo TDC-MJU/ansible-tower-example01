@@ -6,7 +6,7 @@
     aci_login: &aci_login
       hostname: '{{ inventory_hostname }}'
       username: "{{ lookup('env', 'ANSIBLE_NET_USERNAME') }}"
-      password: "{{ lookup('env', 'ANSIBLE_NET_PASSWORD') }}"
+      password: "blahh"
       validate_certs: no
     mytoken: "{{awx_mytoken}}"
     myroom: "{{awx_myroom}}"
