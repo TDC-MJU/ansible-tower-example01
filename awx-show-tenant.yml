@@ -1,15 +1,29 @@
-- name: Customer Tenant Deployment - Basic Tenant\BD\VRF\VID\EPG\AEP-Assignment
+- name: Query all tenants
   hosts: all
   connection: local
   gather_facts: no
+#  vars:
+#    aci_login: &aci_login
+#      hostname: '{{ inventory_hostname }}'
+#      username: "{{ lookup('env', 'ANSIBLE_NET_USERNAME') }}"
+#      password: "{{ lookup('env', 'ANSIBLE_NET_PASSWORD') }}"
+#      validate_certs: no
+#    mytoken: "{{awx_mytoken}}"
+#    myroom: "{{awx_myroom}}"
+
+
+
   vars:
     aci_login: &aci_login
-      hostname: '{{ inventory_hostname }}'
-      username: "{{ lookup('env', 'ANSIBLE_NET_USERNAME') }}"
-      password: "blahh"
+      hostname: "sandboxapicdc.cisco.com"
+      username: "admin"
+      password: "ciscopsdt"
       validate_certs: no
     mytoken: "{{awx_mytoken}}"
     myroom: "{{awx_myroom}}"
+
+
+
     
   tasks:
 
