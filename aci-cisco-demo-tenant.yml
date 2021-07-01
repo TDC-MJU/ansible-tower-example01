@@ -5,8 +5,8 @@
   vars:
     aci_login: &aci_login
       hostname: '{{ inventory_hostname }}'
-      username: "admin"
-      password: "ciscopsdt"
+      username: "{{ lookup('env', 'ANSIBLE_NET_USERNAME') }}"
+      password: "{{ lookup('env', 'ANSIBLE_NET_PASSWORD') }}"
       validate_certs: no
 #    customer_id: '{{ _customer_id }}' # i.e. 100
 #    tenant_name: '{{ _tenant_shortname|upper }}' # i.e. ABC

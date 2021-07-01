@@ -5,7 +5,6 @@
   vars:
     aci_login: &aci_login
       hostname: '{{ inventory_hostname }}'
-#      hostname: "sandboxapicdc.cisco.com"
       username: "{{ lookup('env', 'ANSIBLE_NET_USERNAME') }}"
       password: "{{ lookup('env', 'ANSIBLE_NET_PASSWORD') }}"
       validate_certs: no
