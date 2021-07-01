@@ -2,41 +2,17 @@
   hosts: all
   connection: local
   gather_facts: no
-#  vars:
-#    aci_login: &aci_login
-#      hostname: '{{ inventory_hostname }}'
-#      username: "{{ lookup('env', 'ANSIBLE_NET_USERNAME') }}"
-#      password: "{{ lookup('env', 'ANSIBLE_NET_PASSWORD') }}"
-#      validate_certs: no
-#    mytoken: "{{awx_mytoken}}"
-#    myroom: "{{awx_myroom}}"
-
-#  vars:
-#    aci_login: &aci_login
-#      hostname: "sandboxapicdc.cisco.com"
-#      username: "admin"
-#      password: "ciscopsdt"
-#      validate_certs: no
-#    mytoken: "{{awx_mytoken}}"
-#    myroom: "{{awx_myroom}}"
-
-
 
   vars:
     aci_login: &aci_login
       hostname: '{{ inventory_hostname }}'
-      username: "admin"
+      username: "{{ lookup('env', 'ANSIBLE_NET_USERNAME') }}"
       password: "{{ lookup('env', 'ANSIBLE_NET_PASSWORD') }}"
       validate_certs: no
     mytoken: "{{awx_mytoken}}"
     myroom: "{{awx_myroom}}"
-
-
-
-
     
   tasks:
-
 
   - name: Query all tenants
     aci_tenant:
@@ -45,34 +21,17 @@
     register: all_tenants
     delegate_to: localhost   
     
-    
   - name: Create a subnet list item
     set_fact:
          array_content: "{{ item['fvTenant']['attributes']['name'] }}" 
 
-
-
     with_items: 
       - "{{all_tenants['current'] }}"
-    register: array_of_contents      
+    register: array_of_contents     
       
-      # 
-      
-#  - debug:
-#      var: array_of_contents
-      
-      
-  - name: Make a list with all the subnet items
+  - name: Make a list with all the Tenants
     set_fact: 
          data_struc: "{{ array_of_contents.results | map(attribute='ansible_facts.array_content') | list }}"
-
-
-#  - debug:
-#      var: data_struc
-
-#  - debug:
-#      var: "{{data_struc | to_nice_yaml (indent=2)}}"
-
        
   - name: Cisco Webex Teams - Text Message to a Room
     community.general.cisco_webex:
